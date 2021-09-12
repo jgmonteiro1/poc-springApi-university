@@ -1,6 +1,8 @@
 package com.jgmonteiro.university.entities;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -14,6 +16,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Table(name = "tb_materia")
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class MateriaEntity implements Serializable{
 
     private static final long serialVersionUID = 1L;
