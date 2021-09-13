@@ -18,7 +18,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class MateriaEntity implements Serializable{
+public class MateriaEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -43,7 +43,5 @@ public class MateriaEntity implements Serializable{
     @JsonInclude(Include.NON_EMPTY)
     @Column(name = "freq")
     private Integer frequencia;
-
-
 
 }

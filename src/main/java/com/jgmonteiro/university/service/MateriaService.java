@@ -1,5 +1,6 @@
 package com.jgmonteiro.university.service;
 
+import com.jgmonteiro.university.dto.MateriaDTO;
 import com.jgmonteiro.university.entities.MateriaEntity;
 
 public interface MateriaService {
@@ -8,5 +9,5 @@ public interface MateriaService {
 
     public void delete(final Long id);
 
-    public void create(final MateriaEntity materiaEntity);
+    public void create(final MateriaDTO materiaDTO);
 }

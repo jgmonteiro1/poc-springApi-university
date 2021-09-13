@@ -1,5 +1,6 @@
 package com.jgmonteiro.university.resources;
 
+import com.jgmonteiro.university.dto.MateriaDTO;
 import com.jgmonteiro.university.entities.MateriaEntity;
 import com.jgmonteiro.university.repository.MateriaRepository;
 import com.jgmonteiro.university.service.MateriaServiceImpl;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,8 +35,8 @@ public class MateriaResource {
     }
 
     @PostMapping
-    public ResponseEntity createMateria(@RequestBody MateriaEntity materiaEntity) {
-        materiaService.create(materiaEntity);
+    public ResponseEntity createMateria(@Valid @RequestBody MateriaDTO materiaDTO) {
+        materiaService.create(materiaDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(true);
     }
 

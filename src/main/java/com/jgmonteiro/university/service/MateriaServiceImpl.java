@@ -1,5 +1,7 @@
 package com.jgmonteiro.university.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jgmonteiro.university.dto.MateriaDTO;
 import com.jgmonteiro.university.entities.MateriaEntity;
 import com.jgmonteiro.university.exceptions.MateriaException;
 import com.jgmonteiro.university.repository.MateriaRepository;
@@ -8,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class MateriaServiceImpl implements MateriaService {
@@ -47,7 +47,9 @@ public class MateriaServiceImpl implements MateriaService {
     }
 
     @Override
-    public void create(MateriaEntity materiaEntity) {
+    public void create(MateriaDTO materiaDTO) {
+        ObjectMapper mapper = new ObjectMapper();
+        MateriaEntity materiaEntity = mapper.convertValue(materiaDTO, MateriaEntity.class);
         materiaRepository.save(materiaEntity);
     }
 }
