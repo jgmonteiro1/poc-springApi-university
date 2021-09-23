@@ -1,6 +1,7 @@
 package com.jgmonteiro.university.handler;
 
 import com.jgmonteiro.university.exceptions.MateriaException;
+import com.jgmonteiro.university.model.ErrorMapResponse;
 import com.jgmonteiro.university.model.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,7 @@ public class ResourceHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, String>> handlerValidException(MethodArgumentNotValidException exception){
+    public ResponseEntity<ErrorMapResponse> handlerValidException(MethodArgumentNotValidException exception){
 
         Map<String, String> erros = new HashMap<>();
 
@@ -35,7 +36,12 @@ public class ResourceHandler {
             String mensagem = erro.getDefaultMessage();
             erros.put(campo, mensagem);
         });
+        ErrorMapResponse errorMapResponse = ErrorMapResponse.builder()
+                .erros(erros)
+                .httpStatus(HttpStatus.BAD_REQUEST.value())
+                .timestamp(System.currentTimeMillis())
+                .build();
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMapResponse);
     }
 }
