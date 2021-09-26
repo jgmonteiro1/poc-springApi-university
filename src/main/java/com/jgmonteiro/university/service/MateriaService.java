@@ -3,11 +3,15 @@ package com.jgmonteiro.university.service;
 import com.jgmonteiro.university.dto.MateriaDTO;
 import com.jgmonteiro.university.entities.MateriaEntity;
 
+import java.util.List;
+
 public interface MateriaService {
 
-    public void update(final MateriaEntity materiaEntity);
+    void update(final MateriaEntity materiaEntity);
 
-    public void delete(final Long id);
+    void delete(final Long id);
 
-    public void create(final MateriaDTO materiaDTO);
+    void create(final MateriaDTO materiaDTO);
+
+    List<MateriaEntity> getByHoraMinima(int horaMinima);
 }

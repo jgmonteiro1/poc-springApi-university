@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MateriaServiceImpl implements MateriaService {
 
@@ -51,5 +53,11 @@ public class MateriaServiceImpl implements MateriaService {
         ObjectMapper mapper = new ObjectMapper();
         MateriaEntity materiaEntity = mapper.convertValue(materiaDTO, MateriaEntity.class);
         materiaRepository.save(materiaEntity);
+    }
+
+    @Override
+    public List<MateriaEntity> getByHoraMinima(int horaMinima) {
+        List<MateriaEntity> materiaEntityList = materiaRepository.findByHoraMinima(horaMinima);
+        return materiaEntityList;
     }
 }
