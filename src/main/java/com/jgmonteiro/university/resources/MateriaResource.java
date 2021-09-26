@@ -5,6 +5,8 @@ import com.jgmonteiro.university.entities.MateriaEntity;
 import com.jgmonteiro.university.repository.MateriaRepository;
 import com.jgmonteiro.university.service.MateriaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,7 @@ public class MateriaResource {
         return ResponseEntity.status(HttpStatus.OK).body(materiaRepository.findAll());
     }
 
+    @Cacheable(value = "materia", key = "#id")
     @GetMapping("/{id}")
     public ResponseEntity<Optional<MateriaEntity>> getById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(materiaRepository.findById(id));
@@ -40,6 +43,7 @@ public class MateriaResource {
         return ResponseEntity.status(HttpStatus.CREATED).body(true);
     }
 
+    @CacheEvict(value = "materia", key = "#materia.id")
     @PutMapping
     public ResponseEntity updateMateria(@RequestBody MateriaEntity materiaEntity) {
         materiaService.update(materiaEntity);
